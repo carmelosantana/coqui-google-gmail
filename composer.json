@@ -1,0 +1,69 @@
+{
+    "name": "carmelosantana/coqui-toolkit-google-gmail",
+    "description": "Google Gmail toolkit for Coqui — read, send, label, and draft emails via the Gmail REST API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carmelo Santana"
+        }
+    ],
+    "keywords": [
+        "php-agents",
+        "gmail",
+        "google",
+        "email",
+        "coqui",
+        "toolkit"
+    ],
+    "require": {
+        "php": "^8.4",
+        "symfony/http-client": "^7.0"
+    },
+    "require-dev": {
+        "carmelosantana/php-agents": "^0.7",
+        "pestphp/pest": "^3.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CarmeloSantana\\CoquiToolkitGoogleGmail\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CarmeloSantana\\CoquiToolkitGoogleGmail\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "php-agents": {
+            "toolkits": [
+                "CarmeloSantana\\CoquiToolkitGoogleGmail\\GmailToolkit"
+            ],
+            "description": "Gmail — read, send, label, and draft emails via the Gmail REST API with OAuth2 authentication",
+            "credentials": {
+                "GMAIL_CLIENT_ID": "Google OAuth2 Client ID — create a Desktop app credential at https://console.cloud.google.com/apis/credentials",
+                "GMAIL_CLIENT_SECRET": "Google OAuth2 Client Secret — from the same credential page as the Client ID"
+            },
+            "gated": {
+                "gmail_message": ["send", "reply", "forward", "trash", "untrash", "delete", "modify"],
+                "gmail_draft": ["send", "delete"],
+                "gmail_label": ["create", "delete", "update"],
+                "gmail_auth": ["revoke"]
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
